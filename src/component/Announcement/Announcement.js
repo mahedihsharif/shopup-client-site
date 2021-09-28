@@ -10,6 +10,7 @@ padding:10px;
 height:30px;
 color:white;
 font-weight:500;
+align-item:center;
 `
 const Announcement = () => {
     return (
