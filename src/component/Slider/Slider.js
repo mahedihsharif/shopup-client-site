@@ -46,7 +46,8 @@ const Slide = styled.div`
   height: 100vh;
   align-items: center;
   background-color: #${(props) => props.bg};
-  ${mobile({display: 'flex',flexDirection: 'column',justifyContent: 'center',alignItems: 'center'})};
+  ${mobile({display: 'flex',flexDirection: 'column',justifyContent: 'center',alignItems: 'center',width: "100vw"})};
+  
 `;
 const ImgContainer = styled.div`
   height: 100%;
@@ -61,7 +62,7 @@ const InfoContainer = styled.div`
 `;
 const Image = styled.img`
   width: 100%;
-  ${mobile({width:"180px", marginTop:"40px"})};
+  ${mobile({width:"180px", marginTop:"40px",marginLeft:"30px"})};
 `;
 const Title = styled.h1`
   font-size: 50px;
@@ -89,7 +90,7 @@ const Slider = () => {
     const [slideIndex,setSlideIndex]=React.useState(0);
     const handleSlide = (direction) => {
         if (direction === "left") {
-          setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+          setSlideIndex(slideIndex >= 0 ? slideIndex - 1 : 2);
         } else {
           setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
         }

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Navbar from "./../../component/Navbar/Navbar";
+import { mobile } from './../../responsive';
 
 const Container = styled.div`
 width: 100vw;
@@ -18,9 +19,10 @@ width: 100vw;
 const Wrapper = styled.div`
 background-color:white;
 width:25%;
-margin:0px 100px;
+margin:0px 30px;
 padding:20px;
 border-radius: 5px;
+${mobile({width:"75%", padding:"30px"})}
 `;
 const Form = styled.form`
 display: flex;
@@ -50,6 +52,7 @@ const Title = styled.h1`
 font-size: 24px;
   font-weight: 300;
   text-align: center;
+  ${mobile({fontSize:"20px"})}
 `;
 const Login = () => {
   return (

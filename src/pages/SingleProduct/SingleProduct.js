@@ -5,34 +5,41 @@ import Announcement from "./../../component/Announcement/Announcement";
 import NewsLetter from "./../../component/NewsLetter/NewsLetter";
 import Footer from "./../../component/Footer/Footer";
 import { Add, Remove } from "@material-ui/icons";
+import { mobile } from './../../responsive';
 
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  ${mobile({flexDirection:"column", padding:"10px"})};
 `;
 const ImageContainer = styled.div`
   flex: 1;
 `;
 const InfoContainer = styled.div`
-  flex: 1;
-  margin: 0 60px;
+  flex:1;
+  margin: 0 50px;
+  
 `;
 const Image = styled.img`
   width: 100%;
   height: 80vh;
   object-fit: cover;
   border-radius: 5px;
+  ${mobile({height:"30vh"})}
 `;
 const Title = styled.h1`
   font-weight: 200;
+  ${mobile({fontSize:"20px",marginTop:"10px"})};
 `;
 const Desc = styled.p`
   margin: 30px 0px;
   font-size: 16px;
+  ${mobile({fontSize:"16px"})}
 `;
 const Price = styled.span`
   font-size: 23px;
+  ${mobile({fontSize:"18px"})}
 `;
 
 const FilterContainer = styled.div`
@@ -40,9 +47,11 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 40px 0px;
+  ${mobile({ width: "100%" })}
 `;
 const Filter = styled.div`
   display: flex;
+  align-items: center;
 `;
 const FilterTitle = styled.h3`
   font-size: 20px;
@@ -74,7 +83,7 @@ width:50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+  ${mobile({width:"100%"})};
 `;
 const AmountContainer = styled.div`
   display: flex;
@@ -104,7 +113,8 @@ const Button = styled.button`
     border: 1px solid teal;
     border-radius: 5px;
     color: white;
-  }
+  };
+  
 `;
 const SingleProduct = () => {
   return (

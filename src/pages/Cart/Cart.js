@@ -4,6 +4,7 @@ import Announcement from "./../../component/Announcement/Announcement";
 import Footer from "./../../component/Footer/Footer";
 import styled from "styled-components";
 import { Add, Remove } from "@material-ui/icons";
+import { mobile } from './../../responsive';
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -13,6 +14,7 @@ const Title = styled.h1`
   text-align: center;
   font-weight: 400;
   padding-top: 15px;
+  ${mobile({ fontSize:"20px"})};
 `;
 const Top = styled.div`
   display: flex;
@@ -29,8 +31,11 @@ const TopButton = styled.button`
     props.type === "filled" ? "black" : "transparent"};
   color: ${(props) => props.type === "filled" && "white"};
   font-size: 16px;
+  ${mobile({fontSize:"13px"})};
 `;
-const TopTexts = styled.div``;
+const TopTexts = styled.div`
+${mobile({display: "none"})};
+`;
 const TopText = styled.span`
   margin: 10px;
   font-size: 16px;
@@ -40,6 +45,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
 display: flex;
   justify-content: space-between;
+  ${mobile({flexDirection: "column", marginTop:"15px"})};
 `;
 
 const Info = styled.div`
@@ -48,13 +54,16 @@ flex:3;
 const Product = styled.div`
 display: flex;
   justify-content: space-between;
+  ${mobile({flexDirection: "column"})};
 `;
 const ProductDetail = styled.div`
 flex: 2;
   display: flex;
+  ${mobile({padding:"10px"})}
 `;
 const Image = styled.img`
 width:300px;
+${mobile({width:"180px",height:"180px"})};
 `;
 const Details = styled.div`
 display: flex;
@@ -62,35 +71,46 @@ padding: 40px;
 justify-content: space-around;
 flex-direction: column;
 `;
-const ProductName = styled.div``;
-const ProductId = styled.div``;
+const ProductName = styled.div`
+${mobile({fontSize:"15px"})};
+`;
+const ProductId = styled.div`
+${mobile({fontSize:"15px", marginTop:"10px"})};
+`;
 const ProductColor = styled.div`
 width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
+  ${mobile({marginTop:"10px"})};
 `;
-const ProductSize = styled.div``;
+const ProductSize = styled.div`
+${mobile({fontSize:"15px", marginTop:"10px"})}
+`;
 const PriceDetail = styled.div`
 flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content:center;
+   
 `;
 const ProductAmountContainer= styled.div`
 display: flex;
   align-items: center;
   margin-bottom: 20px;
   cursor: pointer;
+  
 `;
 const ProductAmount=styled.div`
 font-size: 24px;
   margin: 5px;
+  ${mobile({fontSize:"20px"})}
 `;
 const ProductPrice = styled.div`
 font-size: 30px;
   font-weight: 200;
+  ${mobile({fontSize:"20px", paddingBottom:"10px"})}
 `;
 const Hr = styled.hr`
   background-color: #eee;
@@ -107,6 +127,7 @@ flex: 1;
 const SummaryTitle=styled.h1`
 font-weight: 200;
 margin:5px;
+${mobile({fontSize:"20px"})}
 `;
 const SummaryItem = styled.div`
  margin: 30px 0px;
@@ -129,6 +150,7 @@ width: 100%;
   font-weight: 600;
   cursor: pointer;
   border-radius:10px;
+  
 `;
 const Cart = () => {
   return (

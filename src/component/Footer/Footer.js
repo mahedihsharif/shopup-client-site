@@ -1,11 +1,13 @@
 import { Facebook, Instagram, MailOutline, Phone, Room, Twitter } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
+import { mobile } from './../../responsive';
 
 const Container = styled.div`
   height: 50vh;
   display: flex;
   justify-content: space-between;
+  ${mobile({flexDirection:"column",width:"100vw"})}
 `;
 const Left = styled.div`
   flex: 1;
@@ -16,6 +18,7 @@ const Left = styled.div`
 const Logo = styled.div`
 font-size:25px;
 margin-bottom: 15px;
+${mobile({fontSize:"22px"})}
 `;
 const Desc = styled.p`
 font-size:18px;
@@ -47,6 +50,7 @@ const Title = styled.h1`
 font-size:25px;
 margin-bottom: 10px;
 font-weight:400;
+${mobile({fontSize:"22px"})}
 `;
 
 const List = styled.ul`
@@ -65,6 +69,7 @@ cursor: pointer;
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({backgroundColor:"#fcf5f5"})}
 `;
 
 const ContactItem = styled.div`
