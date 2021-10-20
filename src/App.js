@@ -9,23 +9,39 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Redirect
 } from "react-router-dom";
 import Pay from './pages/Pay/Pay';
 import Success from './pages/Success/Success';
 
 function App() {
+  const user=true;
   return (
-    <div>
-       {/* <Home/> */}
-       {/* <ProductList/> */}
-       {/* <SingleProduct/> */}
-       {/* <Register/> */}
-       {/* <Login/> */}
-       {/* <Cart/> */}
-
+    <>
+    
        <Router>
          <Switch>
+         <Route path="/home" >
+           <Home/>
+         </Route>
+         <Route  exact path="/" >
+           <Home/>
+         </Route>
+         <Route path="/products/:category">
+         <ProductList/>
+         </Route>
+         <Route path="/product/:id">
+         <SingleProduct/>
+         </Route>
+         <Route path="/register">
+         {user ? <Redirect to="/" /> : <Register/>}
+         </Route>
+         <Route path="/login">
+         {user ? <Redirect to="/" /> : <Login/>}
+         </Route>
+         <Route path="/cart">
+         <Cart/>
+         </Route>
            <Route path="/pay">
              <Pay/>
            </Route>
@@ -34,7 +50,7 @@ function App() {
            </Route>
          </Switch>
        </Router>
-    </div>
+    </>
   );
 }
 

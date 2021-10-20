@@ -5,6 +5,7 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 const Info = styled.div`
 top: 0;
@@ -62,6 +63,7 @@ cursor: pointer;
 `;
 
 const Product = ({ pd }) => {
+  
   return (
     <Container>
       <Circle />
@@ -71,7 +73,9 @@ const Product = ({ pd }) => {
           <ShoppingCartOutlined/>
         </Icon>
         <Icon>
+        <Link to={`/product/${pd._id}`}>
           <SearchOutlined/> 
+           </Link>
         </Icon>
         <Icon>
            <FavoriteBorderOutlined/>

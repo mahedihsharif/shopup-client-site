@@ -5,41 +5,42 @@ import Announcement from "./../../component/Announcement/Announcement";
 import NewsLetter from "./../../component/NewsLetter/NewsLetter";
 import Footer from "./../../component/Footer/Footer";
 import { Add, Remove } from "@material-ui/icons";
-import { mobile } from './../../responsive';
-
+import { mobile } from "./../../responsive";
+import { useLocation } from "react-router";
+import { publicRequest } from "./../../requestMethod";
+import axios from "axios";
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({flexDirection:"column", padding:"10px"})};
+  ${mobile({ flexDirection: "column", padding: "10px" })};
 `;
 const ImageContainer = styled.div`
   flex: 1;
 `;
 const InfoContainer = styled.div`
-  flex:1;
+  flex: 1;
   margin: 0 50px;
-  
 `;
 const Image = styled.img`
   width: 100%;
   height: 80vh;
   object-fit: cover;
   border-radius: 5px;
-  ${mobile({height:"30vh"})}
+  ${mobile({ height: "30vh" })}
 `;
 const Title = styled.h1`
   font-weight: 200;
-  ${mobile({fontSize:"20px",marginTop:"10px"})};
+  ${mobile({ fontSize: "20px", marginTop: "10px" })};
 `;
 const Desc = styled.p`
   margin: 30px 0px;
   font-size: 16px;
-  ${mobile({fontSize:"16px"})}
+  ${mobile({ fontSize: "16px" })}
 `;
 const Price = styled.span`
   font-size: 23px;
-  ${mobile({fontSize:"18px"})}
+  ${mobile({ fontSize: "18px" })}
 `;
 
 const FilterContainer = styled.div`
@@ -79,11 +80,11 @@ const FilterSizeOption = styled.option`
   font-weight: 300;
 `;
 const AddContainer = styled.div`
-width:50%;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({width:"100%"})};
+  ${mobile({ width: "100%" })};
 `;
 const AmountContainer = styled.div`
   display: flex;
@@ -102,7 +103,7 @@ const Amount = styled.span`
   height: 30px;
 `;
 const Button = styled.button`
-  padding:10px;
+  padding: 10px;
   background-color: rgb(214, 208, 208);
   color: black;
   border: 1px solid #f8f4f4;
@@ -113,55 +114,71 @@ const Button = styled.button`
     border: 1px solid teal;
     border-radius: 5px;
     color: white;
-  };
-  
+  }
 `;
 const SingleProduct = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = React.useState({});
+  const [quantity, setQuantity] = React.useState(1);
+  const [color, setColor] = React.useState("");
+  const [size, setSize] = React.useState("");
+  React.useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:6500/api/products/find/" + id
+        );
+        setProduct(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProduct();
+  }, [id]);
+   
+  const handleQuantity=(type)=>{
+    if (type === "dec"){
+     quantity > 1 && setQuantity(quantity - 1);
+    }
+    else{
+      setQuantity(quantity + 1);
+    }
+  }
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
         <ImageContainer>
-          <Image src="https://i.ibb.co/56kxNgJ/photo-1483985988355-763728e1935b.jpg" />
+          <Image src={product.img} />
         </ImageContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
-          </Desc>
-          <Price>$120</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>${product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color:</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="orange" />
+              {product.color?.map((c) => (
+                <FilterColor color={c} key={c} onClick={() =>setColor(c)}/>
+              ))}
             </Filter>
 
             <Filter>
-              <FilterSize>
+              <FilterSize onChange={(e)=>setSize(e.target.value)}>
                 <FilterSizeOption disabled selected>
                   Size
                 </FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-                <FilterSizeOption>XXL</FilterSizeOption>
-                <FilterSizeOption>XXXL</FilterSizeOption>
+                {product.size?.map((s) => ( <FilterSizeOption key={s}>{s}</FilterSizeOption>))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove/>
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={()=>handleQuantity("dec")}/>
+              <Amount>{quantity}</Amount>
+              <Add onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>
