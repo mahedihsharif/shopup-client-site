@@ -8,7 +8,10 @@ import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "./../../responsive";
 import { useLocation } from "react-router";
 import { publicRequest } from "./../../requestMethod";
+import { addProduct } from '../../redux/cartRedux';
+ 
 import axios from "axios";
+import { useDispatch } from "react-redux";
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
@@ -123,11 +126,12 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = React.useState(1);
   const [color, setColor] = React.useState("");
   const [size, setSize] = React.useState("");
+   const dispatch=useDispatch();
   React.useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:6500/api/products/find/" + id
+        const res = await publicRequest.get(
+          "/products/find/" + id
         );
         setProduct(res.data);
       } catch (err) {
@@ -144,6 +148,10 @@ const SingleProduct = () => {
     else{
       setQuantity(quantity + 1);
     }
+  }
+
+  const handleCartProduct=()=>{
+    dispatch(addProduct({...product, quantity, color, size}));
   }
   return (
     <Container>
@@ -180,7 +188,7 @@ const SingleProduct = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleCartProduct}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

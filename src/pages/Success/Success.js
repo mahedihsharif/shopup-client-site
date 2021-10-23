@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router';
 
 const Success = () => {
     const [orderId, setOrderId] = React.useState(null);
+    const location=useLocation();
+    console.log(location);
     return (
         <div
         style={{

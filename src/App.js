@@ -13,9 +13,12 @@ import {
 } from "react-router-dom";
 import Pay from './pages/Pay/Pay';
 import Success from './pages/Success/Success';
+import { useSelector } from 'react-redux';
+ 
 
 function App() {
-  const user=true;
+  const user=useSelector((state)=> state.user.currentUser);
+  
   return (
     <>
     
@@ -27,9 +30,10 @@ function App() {
          <Route  exact path="/" >
            <Home/>
          </Route>
-         <Route path="/products/:category">
+         <Route path= "/products/:category">
          <ProductList/>
          </Route>
+
          <Route path="/product/:id">
          <SingleProduct/>
          </Route>
@@ -42,9 +46,6 @@ function App() {
          <Route path="/cart">
          <Cart/>
          </Route>
-           <Route path="/pay">
-             <Pay/>
-           </Route>
            <Route path="/success">
              <Success/>
            </Route>

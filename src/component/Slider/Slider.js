@@ -86,7 +86,6 @@ const Button = styled.button`
   ${mobile({display: "none"})};
 `;
 const Slider = () => {
-    console.log(sliderItems)
     const [slideIndex,setSlideIndex]=React.useState(0);
     const handleSlide = (direction) => {
         if (direction === "left") {
