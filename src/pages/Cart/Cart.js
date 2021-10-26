@@ -166,7 +166,7 @@ const Cart = () => {
   React.useEffect(() => {
     const makeRequest = async() => {
         try {
-           const res= await userRequest.post('http://localhost:6500/api/checkout/payment',
+           const res= await userRequest.post('https://shopup-ecommerce.herokuapp.com/checkout/payment',
           {
             tokenId:stripeToken.id,
             amount:500,

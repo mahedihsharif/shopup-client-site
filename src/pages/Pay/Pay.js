@@ -14,7 +14,7 @@ const Pay = () => {
     React.useEffect(() => {
         const makeRequest = async() => {
             try {
-               const res= await axios.post('http://localhost:6500/api/checkout/payment',
+               const res= await axios.post('https://shopup-ecommerce.herokuapp.com/checkout/payment',
               {
                 tokenId:stripeToken.id,
                 amount:2000

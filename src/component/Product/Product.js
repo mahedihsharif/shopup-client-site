@@ -25,7 +25,7 @@ width: 100%;
 const Container = styled.div`
   flex: 1;
   margin: 5px;
-  min-width: 280px;
+  min-width:350px;
   height: 350px;
   display: flex;
   align-items: center;
@@ -46,7 +46,8 @@ position: absolute;
 
 `;
 const Image = styled.img`
-height: 75%;
+height: 60%;
+border-radius: 10%;
 z-index:2;
 `;
 

@@ -18,8 +18,8 @@ const Products = ({cat,filters,sort }) => {
             try{
                 const res= await axios.get(
                     cat
-                    ? `http://localhost:6500/api/products?category=${cat}`
-                  : "http://localhost:6500/api/products"
+                    ? `https://shopup-ecommerce.herokuapp.com/api/products?category=${cat}`
+                  : "https://shopup-ecommerce.herokuapp.com/api/products/"
                    
                  )
                  setProducts(res.data);
